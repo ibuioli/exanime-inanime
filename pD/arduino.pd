@@ -1,0 +1,105 @@
+#N canvas 367 81 852 536 10;
+#X declare -lib moocow;
+#X obj -15 127 select 0 1;
+#X obj -15 83 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg -15 173 close;
+#X msg 104 173 ports;
+#X obj 66 237 route ports;
+#X obj 66 259 print port_list;
+#X msg -130 198 pollintervall 10;
+#X obj -15 251 select 10 13;
+#X floatatom -15 423 5 0 0 0 - - -;
+#X obj -130 170 import moocow;
+#X obj -15 330 bytes2any;
+#X obj -130 136 loadbang;
+#X text 6 82 ON/OFF;
+#X msg 345 341 [;
+#X msg 278 341 ];
+#X msg 250 154 disconnect;
+#X obj 241 93 loadbang;
+#X obj 241 411 sendOSC 12001;
+#X msg 241 122 connect localhost 12001;
+#X obj 278 301 t b list b;
+#X obj 278 212 t b f;
+#X obj -15 296 zl group 16;
+#X obj -15 447 s sop;
+#X obj 19 419 s temp;
+#X obj 199 224 r sop;
+#X obj 278 180 r temp;
+#X msg 35 173 open 8;
+#X obj 452 52 cnv 15 250 200 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 476 90 hsl 200 25 0 230 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 11334 1;
+#X obj 473 72 r sop;
+#X obj 476 150 hsl 200 25 0 4100 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 12134 1;
+#X obj 473 132 r temp;
+#X obj -15 215 comport 8 9600;
+#X text 451 29 Respuesta visual de los Valores;
+#X text 62 419 Temperatura;
+#X text 480 94 MIC-CONDENSER;
+#X text 482 155 DS18B20;
+#X text -11 110 Viene de Arduino;
+#X text 238 430 Va a Processing;
+#X text 23 449 Soplido \, no es necesario \; hacer un line porque se
+está \; haciendo desde Arduino.;
+#X floatatom 19 396 5 0 0 0 - - -;
+#X obj -15 371 unpack 0 0 0;
+#X floatatom 54 396 5 0 0 0 - - -;
+#X obj 88 395 s control;
+#X obj 278 241 pack f f f;
+#X obj 325 212 t b f;
+#X obj 325 180 r control;
+#X msg 306 363 send /sop \$1 \, send /temp \$2 \, send /control \$3
+;
+#X obj 473 207 nbx 10 25 -1e+037 1e+037 0 0 empty empty empty 0 -8
+0 10 -262144 -1 -1 0 256;
+#X obj 473 189 r control;
+#X text -121 6 El mic condenser envía datos estables entre 130 y 132
+si no se lo usa (normalmente se estaciona en 131). Al soplar \, esos
+datos aumentan hasta 200 como mucho \, pero puede haber algún salto
+superior a 200/210.;
+#X connect 0 0 2 0;
+#X connect 0 1 26 0;
+#X connect 1 0 0 0;
+#X connect 2 0 32 0;
+#X connect 3 0 32 0;
+#X connect 4 0 5 0;
+#X connect 6 0 32 0;
+#X connect 7 0 21 0;
+#X connect 7 2 21 0;
+#X connect 8 0 22 0;
+#X connect 10 0 41 0;
+#X connect 11 0 9 0;
+#X connect 11 0 6 0;
+#X connect 13 0 17 0;
+#X connect 14 0 17 0;
+#X connect 15 0 17 0;
+#X connect 16 0 18 0;
+#X connect 18 0 17 0;
+#X connect 19 0 14 0;
+#X connect 19 1 47 0;
+#X connect 19 2 13 0;
+#X connect 20 0 44 0;
+#X connect 20 1 44 1;
+#X connect 21 0 10 0;
+#X connect 24 0 44 0;
+#X connect 25 0 20 0;
+#X connect 26 0 32 0;
+#X connect 29 0 28 0;
+#X connect 31 0 30 0;
+#X connect 32 0 7 0;
+#X connect 32 1 4 0;
+#X connect 40 0 23 0;
+#X connect 41 0 8 0;
+#X connect 41 1 40 0;
+#X connect 41 2 42 0;
+#X connect 42 0 43 0;
+#X connect 44 0 19 0;
+#X connect 45 0 44 0;
+#X connect 45 1 44 2;
+#X connect 46 0 45 0;
+#X connect 47 0 17 0;
+#X connect 49 0 48 0;
